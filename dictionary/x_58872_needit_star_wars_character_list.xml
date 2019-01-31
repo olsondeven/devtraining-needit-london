@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Star Wars Character list" max_length="40" name="x_58872_needit_star_wars_character_list" type="collection">
+        <element label="Birth year" max_length="100" name="birth_year" type="string"/>
+        <element label="Eye color" max_length="100" name="eye_color" type="string"/>
+        <element label="Gender" max_length="100" name="gender" type="string"/>
+        <element label="Hair color" max_length="100" name="hair_color" type="string"/>
+        <element label="Height" max_length="100" name="height" type="string"/>
+        <element label="Mass" max_length="100" name="mass" type="string"/>
+        <element label="Name" max_length="100" name="name" type="string"/>
+        <element label="Skin color" max_length="100" name="skin_color" type="string"/>
+        <index name="index">
+            <element name="birth_year"/>
+            <element name="name"/>
+        </index>
+    </element>
+</database>
