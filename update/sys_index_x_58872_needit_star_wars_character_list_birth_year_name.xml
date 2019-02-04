@@ -15,7 +15,7 @@
         <sys_update_name>sys_index_x_58872_needit_star_wars_character_list_birth_year_name</sys_update_name>
         <sys_updated_by>system</sys_updated_by>
         <sys_updated_on>2019-01-30 15:40:56</sys_updated_on>
-        <table display_value="Star Wars Character list" name="x_58872_needit_star_wars_character_list">41790175db172300c366fbef2996196d</table>
+        <table/>
         <unique_index>false</unique_index>
     </sys_index>
 </record_update>

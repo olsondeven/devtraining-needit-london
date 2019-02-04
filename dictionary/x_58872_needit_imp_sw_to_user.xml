@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="imp sw to user" max_length="40" name="x_58872_needit_imp_sw_to_user" type="collection">
+        <element label="User ID" max_length="100" name="user_id" type="string"/>
+        <element attributes="import_attribute_name=Birth year,edge_encryption_enabled=true" label="Birth year" max_length="40" name="u_birth_year" type="string"/>
+        <element label="Company" max_length="100" name="u_company" type="string"/>
+        <element label="email" max_length="100" name="u_email" type="string"/>
+        <element attributes="import_attribute_name=Eye color,edge_encryption_enabled=true" label="Eye color" max_length="40" name="u_eye_color" type="string"/>
+        <element attributes="import_attribute_name=Gender,edge_encryption_enabled=true" label="Gender" max_length="40" name="u_gender" type="string"/>
+        <element attributes="import_attribute_name=Hair color,edge_encryption_enabled=true" label="Hair color" max_length="40" name="u_hair_color" type="string"/>
+        <element attributes="import_attribute_name=Height,edge_encryption_enabled=true" label="Height" max_length="40" name="u_height" type="integer"/>
+        <element attributes="import_attribute_name=Mass,edge_encryption_enabled=true" label="Mass" max_length="40" name="u_mass" type="integer"/>
+        <element attributes="import_attribute_name=Name,edge_encryption_enabled=true" label="Name" max_length="40" name="u_name" type="string"/>
+        <element attributes="import_attribute_name=Skin color,edge_encryption_enabled=true" label="Skin color" max_length="40" name="u_skin_color" type="string"/>
+    </element>
+</database>

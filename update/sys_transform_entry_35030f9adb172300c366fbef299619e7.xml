@@ -5,29 +5,29 @@
         <coalesce_case_sensitive>false</coalesce_case_sensitive>
         <coalesce_empty_fields>false</coalesce_empty_fields>
         <date_format>yyyy-MM-dd HH:mm:ss</date_format>
-        <map display_value="sw user imp">ed8b2a52dbd32300c366fbef299619d8</map>
+        <map display_value="trans imp sw to user">5ae28f9adb172300c366fbef29961948</map>
         <reference_value_field/>
-        <source_field>phone</source_field>
+        <source_field>u_birth_year</source_field>
         <source_script><![CDATA[answer = (function transformEntry(source) {
 
 	// Add your code here
 	return ""; // return the value to be put into the target field
 
 })(source);]]></source_script>
-        <source_table>imp_user</source_table>
+        <source_table>x_58872_needit_imp_sw_to_user</source_table>
         <sys_class_name>sys_transform_entry</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2019-01-31 20:19:36</sys_created_on>
-        <sys_id>c35c2292dbd32300c366fbef2996196c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>phone</sys_name>
+        <sys_created_on>2019-01-31 21:58:38</sys_created_on>
+        <sys_id>35030f9adb172300c366fbef299619e7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>u_birth_year</sys_name>
         <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
         <sys_policy/>
         <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
-        <sys_update_name>sys_transform_entry_c35c2292dbd32300c366fbef2996196c</sys_update_name>
+        <sys_update_name>sys_transform_entry_35030f9adb172300c366fbef299619e7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-01-31 20:19:36</sys_updated_on>
-        <target_field>phone</target_field>
+        <sys_updated_on>2019-02-04 18:46:49</sys_updated_on>
+        <target_field>x_58872_needit_birth_year</target_field>
         <target_table>sys_user</target_table>
         <use_source_script>false</use_source_script>
     </sys_transform_entry>

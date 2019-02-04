@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition/>
+        <conditional>false</conditional>
+        <name>Import SW to user list</name>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2019-02-04 16:36:42</run_start>
+        <run_time>1970-01-01 07:00:00</run_time>
+        <run_type>on_demand</run_type>
+        <script><![CDATA[//gs.info("SCHEDULED SCRIPT FIRED");
+//initialize data
+var apiResData = null;
+var pasObject = null;
+
+//connameuctor for import object for starwars api > imp sw to user table > sys_user table
+function ImpSwObject(eColor, hColor, height, birth, name, skColor, mass, gender) {
+  //gs.info("Import Obj FIRED");
+  //initialize regEx vars for prototypes
+  var reW3 = /(\w+)\s(\w+)\s(\w)/gi;
+  var reW2 = /(\w+)\s(\w+)/gi;
+  var reWex = /(\w+)\-(\w+)\s(\w)/gi;
+
+  this.u_eye_color = eColor;
+  this.u_hair_color = hColor;
+  this.u_height = height;
+  this.u_birth_year = birth;
+  this.u_name = name;
+  this.u_skin_color = skColor;
+  this.u_mass = mass;
+  this.u_gender = gender;
+  this.u_company = "Lucasarts Entertainment";
+
+  //string format for email and ID
+  if (name.match(/\-/gi) && !name.match(/\s/gi)) {
+    this.user_id = name.replace(/\-/gi, ".").toLowerCase();
+    this.u_email = name.replace(/\-/gi, ".").toLowerCase() + "@swforlife.com";
+  } else {
+    if (name.split(/\s|\-/gi).length > 2) {
+      if (name.match(/\-/gi)) {
+        this.user_id = name.replace(reWex, '$1.$3').toLowerCase();
+        this.u_email = (name.replace(reWex, '$1.$3') + "@swforlife.com").toLowerCase();
+      } else {
+        this.user_id = name.replace(reW3, '$1.$3').toLowerCase();
+        this.u_email = (name.replace(reW3, '$1.$3') + "@swforlife.com").toLowerCase();
+      }
+    } else {
+      this.user_id = name.replace(reW2, '$1.$2').toLowerCase();
+      this.u_email = (name.replace(reW2, '$1.$2') + "@swforlife.com").toLowerCase();
+    }
+  }
+}
+
+//////////api call to get list of starwars characters/////////////////////
+//make this a method in a factory through script include
+function apiGet(currRestMessage, currResMeth, swNum) {
+  //gs.info("apiGet FIRED");
+  try {
+    var r = new sn_ws.RESTMessageV2(currRestMessage, currResMeth);
+    r.setStringParameterNoEscape('par_sw_number', swNum);
+    //api call invoked
+    var response = r.execute();
+    //api data returned how you requested through the header, if not specified then it will be return default from the api
+    var responseBody = response.getBody();
+    //http status code? ex 200 401
+    var httpStatus = response.getStatusCode();
+    //returning data given back from
+    var finalR = JSON.parse(responseBody);
+
+    //gs.info("Function Fired SW "+finalR.results[0].name);
+    return finalR;
+  } catch (ex) {
+    var message = ex.message;
+    return message;
+  }
+}
+
+
+for (i = 1; i < 89; i++) {
+  apiResData = apiGet('x_58872_needit.Star Wars Characters', 'Get individual SW characters', i);
+  if (typeof apiResData == "object" && !apiResData.hasOwnProperty("detail")) {
+    //breaks due to no information being sent back. Need to try catch
+    ///////////updating import table need to update with an object////////////
+    var request = new sn_ws.RESTMessageV2();
+    request.setEndpoint('https://dev67558.service-now.com/api/now/import/x_58872_needit_imp_sw_to_user');
+    request.setHttpMethod('POST');
+
+    //Eg. UserName="admin", Password="admin" for this code sample.
+    var user = 'admin';
+    //encrypted by SNOW through sys_properties
+    var password = gs.getProperty("x_58872_needit.sw_api_pass");
+
+    request.setBasicAuth(user, password);
+    request.setRequestHeader("Accept", "application/json");
+
+
+    pasObject = new ImpSwObject(apiResData.eye_color, apiResData.hair_color, apiResData.height, apiResData.birth_year, apiResData.name, apiResData.skin_color, apiResData.mass, apiResData.gender);
+    //gs.info("name "+pasObject.u_name+" birth "+pasObject.u_birth_year);
+
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestBody(JSON.stringify(pasObject));
+    var response = request.execute();
+    ///////////updating import table need to update with an object////////////
+  } else {
+    gs.error("Error out for SW api get\n" + apiResData);
+  }
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-02-04 16:37:12</sys_created_on>
+        <sys_id>0dbf9aebdb132300c366fbef299619f9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Import SW to user list</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sysauto_script_0dbf9aebdb132300c366fbef299619f9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-02-04 16:37:12</sys_updated_on>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>
